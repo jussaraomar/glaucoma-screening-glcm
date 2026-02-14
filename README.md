@@ -55,7 +55,7 @@ Evaluation includes accuracy, ROC-AUC, confusion matrices, and threshold-based s
 
 An interactive demo application has been deployed using Gradio and Hugging Face Spaces:
 
-👉 [Demo App](https://huggingface.co/spaces/juuuu0/glaucoma-detection-app "Here")
+🔗 [Demo App](https://huggingface.co/spaces/juuuu0/glaucoma-detection-app "Here")
 
 The demo allows users to upload a fundus image and receive:
 * A predicted class
