@@ -12,11 +12,8 @@ IMAGE_SIZE = 512
 T_LOW = 0.05
 T_HIGH = 0.10
 
-# RG is positive class in EyePACS
-CLASS_NAMES = ["NRG", "RG"]
 MODEL_PATH = Path(__file__).resolve().parent / "weights" / "resnet50_eyepacs_best.pt"
 
-# match your training preprocessing (resize + ToTensor)
 preprocess = transforms.Compose([
     transforms.Resize((IMAGE_SIZE, IMAGE_SIZE)),
     transforms.ToTensor(),
@@ -28,6 +25,7 @@ def build_model(device: str):
 
     state = torch.load(MODEL_PATH, map_location=device, weights_only=True)
     model.load_state_dict(state)
+
     model.to(device)
     model.eval()
     return model
@@ -39,46 +37,39 @@ def risk_bucket(prob_rg: float) -> str:
         return "LOW risk"
     return "MID / review suggested"
 
+
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+MODEL = build_model(DEVICE)
+
 def predict(image: Image.Image):
     if image is None:
-        return "No image provided", "0%", "N/A"
-
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    model = build_model(device)
+        return "No image provided", "0.00%", "N/A"
 
     if image.mode != "RGB":
         image = image.convert("RGB")
 
-    x = preprocess(image).unsqueeze(0).to(device)
+    x = preprocess(image).unsqueeze(0).to(DEVICE)
 
     with torch.no_grad():
-        logits = model(x)
+        logits = MODEL(x)
         probs = torch.softmax(logits, dim=1).cpu().numpy()[0]
 
     prob_nrg = float(probs[0])
     prob_rg = float(probs[1])
     pred_idx = int(np.argmax(probs))
 
-    # Human-readable labels
-    if pred_idx == 1:
-        pred_label = "Referable Glaucoma"
-    else:
-        pred_label = "Non-Referable Glaucoma"
-
+    pred_label = "Referable Glaucoma" if pred_idx == 1 else "Non-Referable Glaucoma"
     bucket = risk_bucket(prob_rg)
-
-    # Format probability nicely as percentage
     prob_percent = f"{prob_rg * 100:.2f}%"
 
     return pred_label, prob_percent, bucket
-
 
 demo = gr.Interface(
     fn=predict,
     inputs=gr.Image(type="pil", label="Upload fundus image"),
     outputs=[
         gr.Textbox(label="Prediction"),
-        gr.Textbox(label="Probability of Glaucoma"),
+        gr.Textbox(label="Probability of Glaucoma (Confidence)"),
         gr.Textbox(label="Risk Category"),
     ],
     title="Glaucoma Screening Demo (ResNet50 + EyePACS AIROGS)",
