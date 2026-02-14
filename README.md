@@ -23,6 +23,7 @@ The model was trained on a balanced subset of the EyePACS AIROGS glaucoma datase
 * ~4,000 RG and ~4,000 NRG images for training 
 * ~385 RG and ~385 NRG images for validation
 * ~385 RG and ~385 NRG images for testing
+
 The dataset is not included in this repository.
 
 ## Repository Structure
