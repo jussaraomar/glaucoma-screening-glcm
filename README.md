@@ -38,9 +38,14 @@ glcm/
 
 ## Training
 Train the model:
-`python -m glcm.src.train_eyepacs_resnet50`
+```javascript
+python -m glcm.src.train_eyepacs_resnet50
+```
+
 Evaluate the model:
-`python -m glcm.src.eval_eyepacs_resnet50`
+```javascript
+python -m glcm.src.eval_eyepacs_resnet50
+```
 
 Evaluation includes accuracy, ROC-AUC, confusion matrices, and threshold-based screening analysis.
 
