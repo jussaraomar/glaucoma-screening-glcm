@@ -1,13 +1,10 @@
 # Automated Glaucoma Screening using Deep Learning (ResNet-50)
-================= 
 
 This repository contains the full source code for a computer science project focused on automated glaucoma screening from retinal fundus images using deep learning.
 
 The system performs binary image-level classification between:
-
-Referable Glaucoma (RG)
-Non-Referable Glaucoma (NRG)
-
+* Referable Glaucoma (RG)
+* Non-Referable Glaucoma (NRG)
 The project also includes a confidence-based risk grading mechanism and an interactive demo application.
 
 
@@ -21,7 +18,7 @@ The project also includes a confidence-based risk grading mechanism and an inter
 * Learning rate scheduler + early stopping
 * Mixed-precision training for efficiency
 
-##Dataset
+## Dataset
 The model was trained on a balanced subset of the EyePACS AIROGS glaucoma dataset by [Riley Kiefer](https://www.kaggle.com/datasets/deathtrooper/glaucoma-dataset-eyepacs-airogs-light-v2 "Riley Kiefer"), containing:
 * ~4,000 RG and ~4,000 NRG images for training 
 * ~385 RG and ~385 NRG images for validation
@@ -29,6 +26,7 @@ The model was trained on a balanced subset of the EyePACS AIROGS glaucoma datase
 The dataset is not included in this repository.
 
 ## Repository Structure
+```javascript
 glcm/
 ├── config/        # Parameters and paths
 ├── src/           # Training and evaluation scripts
@@ -36,11 +34,11 @@ glcm/
 ├── demo/          # Gradio demo application
 ├── models/        # Saved weights (not tracked)
 └── reports/       # Evaluation outputs
+```
 
 ## Training
 Train the model:
 `python -m glcm.src.train_eyepacs_resnet50`
-
 Evaluate the model:
 `python -m glcm.src.eval_eyepacs_resnet50`
 
