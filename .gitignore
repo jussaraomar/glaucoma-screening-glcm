@@ -16,7 +16,6 @@ glcm/**/data/
 
 # outputs
 glcm/models/
-glcm/reports/
 glcm/demo/weights/
 
 # logs

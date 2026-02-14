@@ -1,0 +1,37 @@
+{
+  "dataset": "EyePACS Glaucoma",
+  "model": "ResNet50",
+  "image_size": 512,
+  "accuracy": 0.9207792207792208,
+  "roc_auc": 0.9739720020239501,
+  "confusion_matrix_default": [
+    [
+      346,
+      39
+    ],
+    [
+      22,
+      363
+    ]
+  ],
+  "best_screening_threshold": 0.02,
+  "best_sensitivity": 0.9974025974025974,
+  "best_specificity": 0.625974025974026,
+  "confusion_matrix_screening": [
+    [
+      241,
+      144
+    ],
+    [
+      1,
+      384
+    ]
+  ],
+  "risk_grading": {
+    "T_LOW": 0.05,
+    "T_HIGH": 0.1,
+    "low": 280,
+    "mid": 32,
+    "high": 458
+  }
+}
