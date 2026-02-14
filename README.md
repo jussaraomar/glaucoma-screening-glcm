@@ -5,6 +5,7 @@ This repository contains the full source code for a computer science project foc
 The system performs binary image-level classification between:
 * Referable Glaucoma (RG)
 * Non-Referable Glaucoma (NRG)
+
 The project also includes a confidence-based risk grading mechanism and an interactive demo application.
 
 
@@ -60,6 +61,7 @@ The demo allows users to upload a fundus image and receive:
 * A predicted class
 * Probability of glaucoma
 * A simple risk category
+
 This demo serves as a proof-of-concept deployment of the trained model.
 
 ## Disclaimer
